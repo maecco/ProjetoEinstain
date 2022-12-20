@@ -1,9 +1,10 @@
-import source.gui.App as App
+import tkinter as tk
+import source.app as app
 
 if __name__ == "__main__":
-    aplication = App()
-    
-    aplication.master.title("Corretor de provas")
-    aplication.master.size(800,600)
-
-    aplication.mainloop()
+    root = tk.Tk()
+    root.title("Corretor de Provas")
+    root.geometry("500x280")
+    root.resizable(False, False)
+    application = app.App(root)
+    application.mainloop()
