@@ -3,6 +3,7 @@ from os import path
 import openpyxl as xl
 from openpyxl import Workbook
 from openpyxl.styles.numbers import FORMAT_PERCENTAGE_00
+from openpyxl.styles import Font
 
 
 def load_gabarito(PATH):
@@ -54,6 +55,7 @@ def save_file(filepath, data):
     ws1.title = "Relatorio da correção"
 
     ws1['A1'] = 'Individual'
+    ws1['A1'].font = Font(bold=True)
     ws1['A2'] = 'Aluno'
     ws1['B2'] = 'Acerto prcentual'
     ws1['C2'] = 'Acerto absoluto'
@@ -72,19 +74,24 @@ def save_file(filepath, data):
 
 
     ws1['E1'] = 'Total'
-    ws1['E2'] = 'Acerto percentual'
-    ws1['E3'] = 'Acerto absoluto'
-    ws1['E4'] = 'Provas zeradas'
-    ws1['E5'] = 'Acerto percentual efetivo'
+    ws1['E1'].font = Font(bold=True)
+    ws1['E2'] = 'Acerto percentual medio'
+    ws1['E3'] = 'Acerto absoluto medio'
+    ws1['E4'] = 'Acertos efetivos (sem as provas zeradas)'
+    ws1['E4'].font = Font(bold=True)
+    ws1['E5'] = 'Provas zeradas'
+    ws1['E6'] = 'Acerto percentual efetivo'
+    ws1['E7'] = 'Acerto absoluto efetivo'
 
     total = data['geral']
     ws1['F2'] = total['acerto_percentual']
     ws1['F3'] = total['acerto_absoluto']
-    ws1['F4'] = total['provas_zeradas']
-    ws1['F5'] = total['acerto_percentual_efetivo']
+    ws1['F5'] = total['provas_zeradas']
+    ws1['F6'] = total['acerto_percentual_efetivo']
+    ws1['F7'] = total['acerto_absoluto_efetivo']
 
     ws1['F2'].number_format = FORMAT_PERCENTAGE_00
-    ws1['F5'].number_format = FORMAT_PERCENTAGE_00
+    ws1['F6'].number_format = FORMAT_PERCENTAGE_00
 
     wb.save(filename = filepath)
     return 'success'

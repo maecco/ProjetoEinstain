@@ -49,7 +49,6 @@ class App(tk.Frame):
 
             if self.PATH_SAVE == None:
                 self.PATH_SAVE = path.dirname(self.PATH_GABARITO)
-                print(self.PATH_SAVE)
             status = filesystem.save_file(self.PATH_SAVE, self.ModuloEstatistica.get_data())
             if status != "success":
                 print(status)
@@ -134,4 +133,7 @@ class Filebrowser(tk.Frame):
             file_path = file_path + ".xlsx"
             self.master.PATH_SAVE = file_path
             self.path_save.set(file_path)
-        
+
+
+class ConfigFrame(tk.Frame):
+    pass

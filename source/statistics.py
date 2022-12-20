@@ -28,7 +28,7 @@ class Statistics():
             questoes = self.respsotas[aluno]
 
             acertos = 0
-            for numero, resposta in questoes.items():
+            for numero, resposta in questoes.items(): 
                 if resposta.upper() == self.gabarito[numero].upper():
                     acertos += 1
             
@@ -45,36 +45,22 @@ class Statistics():
         
         self.acertos_individuais.sort(reverse=True) # da maior nota pra menor
         
-        self.acerto_absoluto_total = soma_acertos_totais
-        self.acerto_percentual_total = soma_acertos_percentuais/self.numero_de_participantes
-        self.acerto_percentual_efetivo = soma_acertos_percentuais/(self.numero_de_participantes-self.provas_zeradas)
+        self.acerto_absoluto_medio_total = soma_acertos_totais/self.numero_de_participantes
+        self.acerto_percentual_medio_total = soma_acertos_percentuais/self.numero_de_participantes
+        self.acerto_absoluto_medio_efetivo = soma_acertos_totais/(self.numero_de_participantes-self.provas_zeradas)
+        self.acerto_percentual_medio_efetivo = soma_acertos_percentuais/(self.numero_de_participantes-self.provas_zeradas)
 
 
     def get_data(self):
         data = {
             'geral':{
-                'acerto_percentual':self.acerto_percentual_total,
-                'acerto_absoluto':self.acerto_absoluto_total,
-                'acerto_percentual_efetivo':self.acerto_percentual_efetivo,
+                'acerto_percentual':self.acerto_percentual_medio_total,
+                'acerto_absoluto':self.acerto_absoluto_medio_total,
+                'acerto_absoluto_efetivo':self.acerto_absoluto_medio_efetivo,
+                'acerto_percentual_efetivo':self.acerto_percentual_medio_efetivo,                
                 'provas_zeradas':self.provas_zeradas
             },
             'individual': self.acertos_individuais
         }
         return data
 
-
-    def print_data(self):
-        sepatator = "--------------------------------------------------------------------"
-        print(sepatator)
-        print("Total")
-        print("\tAcerto percentual:", self.acerto_percentual_total)
-        print("\tProvas zeradas: ", self.provas_zeradas)
-        print("\tAcerto efetivo:", self.acerto_percentual_efetivo)
-        print()
-        print("Individual\n\n")
-        for aluno in self.acertos_individuais: #aluno=(numero_de_acertos, percentual_de_acertos, nome)
-            print("\tNome:", aluno[2])
-            print("\tAcerto absoluto:", aluno[0])
-            print("\tAcerto percentual", aluno[1])
-            print()
-        print(sepatator)
