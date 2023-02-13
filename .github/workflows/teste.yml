@@ -1,0 +1,30 @@
+name: "Teste"
+
+on:
+  push:
+    branches:
+      - '*'
+
+job:
+  printinfo:
+    matrix:
+      config:
+        - os: windows-latest
+        - os: macos-latest
+        - os: ubuntu-latest
+
+    runs-on: ${{ matrix.config.os }}
+      steps:
+        - name: checkout
+        - uses: actions/checkout@v3
+
+        if: ${{ env.os == windows-latest }}
+          - name: print data
+          - run: env
+        
+        if: ${{ env.os ==  macos-latest || env.os == ubuntu-latest }}
+          - name: print data
+          - run: |
+              echo $HOME
+              echo $PATH
+
